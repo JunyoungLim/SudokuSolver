@@ -22,8 +22,6 @@ public class MainGUI extends Application
 	private static final String GREEN_BOX = "-fx-background-color: honeydew; -fx-font: 20 arial;" +
 			"-fx-font-weight: bold; -fx-text-fill: black;";
 	
-	TextField[][] puzzle;
-	
 	public static void main(String[] args)
 	{
 		Application.launch(args);
@@ -35,7 +33,7 @@ public class MainGUI extends Application
 		stage.setTitle("Sudoku Solver");
 		stage.setResizable(true);
 		
-		puzzle = new TextField[9][9];
+		TextField[][] puzzle = new TextField[9][9];
 		
 		VBox vBox = new VBox();
 		for (int r = 0; r < 9; r++)
@@ -60,6 +58,9 @@ public class MainGUI extends Application
 						t.setText("");
 					else
 					{
+						if (!event.getCode().isDigitKey())
+							return;
+						
 						int row = index > 80 ? 0 : index / 9;
 						int col = index > 80 ? 0 : index % 9;
 						puzzle[row][col].requestFocus();
